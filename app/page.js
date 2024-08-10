@@ -38,13 +38,17 @@ export default function Home() {
   
 
 
-  // temp chat generated UI -->>
+  // temp chatgpt generated UI -->>
 
   return (
     <Box sx={{ p: 2 }}>
       {/* Chat History */}
+      {/* hard coded in first message  */}
       <Typography>{firstMessage}</Typography>
+
+      {/* using a stack to store chat history vertically.  */}
       <Stack spacing={2} sx={{ mb: 2 }}>
+        {/* iterate through stack to display all chats! */}
         {history.map((msg, index) => (
           <Typography key={index} align={msg.role === "user" ? "right" : "left"}>
             {msg.role === "user" ? "You: " : "Bot: "} {msg.parts[0].text}
@@ -57,8 +61,12 @@ export default function Home() {
         fullWidth
         variant="outlined"
         placeholder="Type your message..."
+
+        // input -> message, so that it can display 
         value={message}
+        // to update with input
         onChange={(e) => setMessage(e.target.value)}
+        // enter key action
         onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
       />
 
@@ -66,6 +74,7 @@ export default function Home() {
       <Button 
         variant="contained" 
         color="primary" 
+        // call the sendMessage function!
         onClick={sendMessage} 
         sx={{ mt: 1 }}>
         Send

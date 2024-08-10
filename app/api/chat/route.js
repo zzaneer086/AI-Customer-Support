@@ -25,9 +25,9 @@ async function startChat(history){
 
 
 export async function POST(req){
-    // retrive convo hist -> json
+    // retrive convo history -> json format
     const history = await req.json()
-    // get most recent message
+    // store most recent message
     const userMsg = history[history.length-1]
 
     // handle api request & responce errors 
