@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react"
 
 export default function Home() {
-  // to store the convo
+  // to store the convo.
   const [history, setHistory] = useState([])
   // store the input/curr message
   const [message, setMessage] = useState("")
