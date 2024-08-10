@@ -43,6 +43,7 @@ export default function Home() {
   return (
     <Box sx={{ p: 2 }}>
       {/* Chat History */}
+      <Typography>{firstMessage}</Typography>
       <Stack spacing={2} sx={{ mb: 2 }}>
         {history.map((msg, index) => (
           <Typography key={index} align={msg.role === "user" ? "right" : "left"}>
