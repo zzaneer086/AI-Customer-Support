@@ -4,11 +4,15 @@ import Image from "next/image";
 // state var to store messages
 import { useState } from "react"
 
+
 export default function Home() {
   // to store the convo.
   const [history, setHistory] = useState([])
   // store the input/curr message
   const [message, setMessage] = useState("")
+
+  // Typing boolean for CSS animations
+  const [typing, setTyping] = useState(false)
 
   const firstMessage = "Hi there! I'm the Headstarter virtual assistant. How can I help?"
 
@@ -41,44 +45,91 @@ export default function Home() {
   // temp chatgpt generated UI -->>
 
   return (
-    <Box sx={{ p: 2 }}>
-      {/* Chat History */}
-      {/* hard coded in first message  */}
-      <Typography>{firstMessage}</Typography>
+    <Box onClick={function(e){ e.target.id == 'textfield' ? setTyping(true) : setTyping(false)}} 
+    sx={{   
+      width: '100vw',
+      height: '100vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'flex-end',
+      backgroundColor: 'black'
+    }}>
+      <Box sx={{
+        width: '40vw', marginBottom: '50px'
+      }}>
+        <img className={"glow eye"} id="left-eye" src="eye.svg"/>
+        <img className={typing ? "pupil focused" : "pupil idle"} id="left-pupil" src="pupil.svg"/>
+        <img className={"glow eye"} id="right-eye" src="eye.svg"/>
+        <img className={typing ? "pupil focused" : "pupil idle"} id="right-pupil" src="pupil.svg"/>
 
-      {/* using a stack to store chat history vertically.  */}
-      <Stack spacing={2} sx={{ mb: 2 }}>
-        {/* iterate through stack to display all chats! */}
-        {history.map((msg, index) => (
-          <Typography key={index} align={msg.role === "user" ? "right" : "left"}>
-            {msg.role === "user" ? "You: " : "Bot: "} {msg.parts[0].text}
-          </Typography>
-        ))}
-      </Stack>
+        {/* Chat History */}
+        {/* hard coded in first message  */}
+        <Box maxHeight={'400px'} minHeight={'400px'} overflow={"hidden auto"} padding={'10px'}>
+        <Typography>{firstMessage}</Typography>
 
-      {/* Input Field */}
-      <TextField
-        fullWidth
-        variant="outlined"
-        placeholder="Type your message..."
+        {/* using a stack to store chat history vertically.  */}
+          <Stack spacing={2} sx={{ mb: 2 }}>
+            {/* iterate through stack to display all chats! */}
+            {history.map((msg, index) => (
+              <Typography key={index} align={msg.role === "user" ? "right" : "left"}>
+                {msg.role === "user" ? "You: " : "Bot: "} {msg.parts[0].text}
+              </Typography>
+            ))}
+          </Stack>
+        </Box>
 
-        // input -> message, so that it can display 
-        value={message}
-        // to update with input
-        onChange={(e) => setMessage(e.target.value)}
-        // enter key action
-        onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-      />
+        {/* Input Field */}
+        <TextField
+          id="textfield"
+          fullWidth
+          multiline
+          rows={5}
+          variant="outlined"
+          placeholder="Type your message..."
+          // input -> message, so that it can display 
+          value={message}
+          // to update with input
+          onChange={(e) => setMessage(e.target.value)}
+          // enter key action
+          onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+          sx={{
+            boxSizing: 'border-box',
+            border: '2px solid #ccc',
+            borderRadius: '5px',
+            backgroundColor: '#f8f8f8',
+            marginTop: '10px',
+            resize: 'none',
+            transition: '0.2s',
+            transform: typing ? 'translate(-3px, -3px)' : 'translate(0, 0)',
+            boxShadow: typing ? "3px 3px 0 cyan": "0 0 0 transparent",
+            "&:hover" : {
+              transform: 'translate(-3px, -3px)',
+              boxShadow: "3px 3px 0 cyan",
+            }
+          }}
+        />
 
-      {/* Send Button */}
-      <Button 
-        variant="contained" 
-        color="primary" 
-        // call the sendMessage function!
-        onClick={sendMessage} 
-        sx={{ mt: 1 }}>
-        Send
-      </Button>
+        {/* Send Button */}
+        <Button 
+          variant="contained" 
+          // call the sendMessage function!
+          onClick={sendMessage} 
+          sx={{ 
+            mt: 1,
+            backgroundColor: "transparent",
+            border: "1px solid cyan",
+            marginTop: '5px',
+            float: 'right',
+            transition: '0.2s',
+            "&:hover" : {
+              backgroundColor: 'transparent',
+              transform: 'translate(-3px, -3px)',
+              boxShadow: "3px 3px 0 cyan",
+            }
+          }}>
+          Send
+        </Button>
+      </Box>
     </Box>
   )
 }
