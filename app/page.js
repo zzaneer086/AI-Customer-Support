@@ -51,27 +51,11 @@ export default function Home() {
       height: '100vh',
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center',
+      alignItems: 'flex-end',
       backgroundColor: 'black'
     }}>
-
-{/* <div id="wrapper" onClick={function(e){ e.target.tagName == 'TEXTAREA' ? setTyping(true) : setTyping(false)}}>
-      <div id="content">
-        <img className={"glow eye"} id="left-eye" src="eye.svg"/>
-        <img className={typing ? "pupil focused" : "pupil idle"} id="left-pupil" src="pupil.svg"/>
-        <img className={"glow eye"} id="right-eye" src="eye.svg"/>
-        <img className={typing ? "pupil focused" : "pupil idle"} id="right-pupil" src="pupil.svg"/>
-        <form>
-          <textarea id="chat" placeholder="How can I help?" ></textarea>
-        </form>
-      </div>
-    </div> */}
-
       <Box sx={{
-        width: '40vw',
-        display: 'flexbox', 
-        justifyContent: 'center', 
-        alignItems: 'center'
+        width: '40vw', marginBottom: '50px'
       }}>
         <img className={"glow eye"} id="left-eye" src="eye.svg"/>
         <img className={typing ? "pupil focused" : "pupil idle"} id="left-pupil" src="pupil.svg"/>
@@ -80,17 +64,19 @@ export default function Home() {
 
         {/* Chat History */}
         {/* hard coded in first message  */}
+        <Box maxHeight={'400px'} minHeight={'400px'} overflow={"hidden auto"} padding={'10px'}>
         <Typography>{firstMessage}</Typography>
 
         {/* using a stack to store chat history vertically.  */}
-        <Stack spacing={2} sx={{ mb: 2 }}>
-          {/* iterate through stack to display all chats! */}
-          {history.map((msg, index) => (
-            <Typography key={index} align={msg.role === "user" ? "right" : "left"}>
-              {msg.role === "user" ? "You: " : "Bot: "} {msg.parts[0].text}
-            </Typography>
-          ))}
-        </Stack>
+          <Stack spacing={2} sx={{ mb: 2 }}>
+            {/* iterate through stack to display all chats! */}
+            {history.map((msg, index) => (
+              <Typography key={index} align={msg.role === "user" ? "right" : "left"}>
+                {msg.role === "user" ? "You: " : "Bot: "} {msg.parts[0].text}
+              </Typography>
+            ))}
+          </Stack>
+        </Box>
 
         {/* Input Field */}
         <TextField
@@ -111,6 +97,7 @@ export default function Home() {
             border: '2px solid #ccc',
             borderRadius: '5px',
             backgroundColor: '#f8f8f8',
+            marginTop: '10px',
             resize: 'none',
             transition: '0.2s',
             transform: typing ? 'translate(-3px, -3px)' : 'translate(0, 0)',
@@ -131,7 +118,7 @@ export default function Home() {
             mt: 1,
             backgroundColor: "transparent",
             border: "1px solid cyan",
-            marginTop: '20px',
+            marginTop: '5px',
             float: 'right',
             transition: '0.2s',
             "&:hover" : {
