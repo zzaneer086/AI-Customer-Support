@@ -41,44 +41,98 @@ export default function Home() {
   // temp chatgpt generated UI -->>
 
   return (
-    <Box sx={{ p: 2 }}>
-      {/* Chat History */}
-      {/* hard coded in first message  */}
-      <Typography>{firstMessage}</Typography>
+    <Box sx={{   
+      width: '100vw',
+      height: '100vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'black'
+    }}>
 
-      {/* using a stack to store chat history vertically.  */}
-      <Stack spacing={2} sx={{ mb: 2 }}>
-        {/* iterate through stack to display all chats! */}
-        {history.map((msg, index) => (
-          <Typography key={index} align={msg.role === "user" ? "right" : "left"}>
-            {msg.role === "user" ? "You: " : "Bot: "} {msg.parts[0].text}
-          </Typography>
-        ))}
-      </Stack>
+{/* <div id="wrapper" onClick={function(e){ e.target.tagName == 'TEXTAREA' ? setTyping(true) : setTyping(false)}}>
+      <div id="content">
+        <img className={"glow eye"} id="left-eye" src="eye.svg"/>
+        <img className={typing ? "pupil focused" : "pupil idle"} id="left-pupil" src="pupil.svg"/>
+        <img className={"glow eye"} id="right-eye" src="eye.svg"/>
+        <img className={typing ? "pupil focused" : "pupil idle"} id="right-pupil" src="pupil.svg"/>
+        <form>
+          <textarea id="chat" placeholder="How can I help?" ></textarea>
+        </form>
+      </div>
+    </div> */}
 
-      {/* Input Field */}
-      <TextField
-        fullWidth
-        variant="outlined"
-        placeholder="Type your message..."
+      <Box sx={{
+        width: '40vw',
+        display: 'flexbox', 
+        justifyContent: 'center', 
+        alignItems: 'center'
+      }}>
 
-        // input -> message, so that it can display 
-        value={message}
-        // to update with input
-        onChange={(e) => setMessage(e.target.value)}
-        // enter key action
-        onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-      />
+        {/* Chat History */}
+        {/* hard coded in first message  */}
+        <Typography>{firstMessage}</Typography>
 
-      {/* Send Button */}
-      <Button 
-        variant="contained" 
-        color="primary" 
-        // call the sendMessage function!
-        onClick={sendMessage} 
-        sx={{ mt: 1 }}>
-        Send
-      </Button>
+        {/* using a stack to store chat history vertically.  */}
+        <Stack spacing={2} sx={{ mb: 2 }}>
+          {/* iterate through stack to display all chats! */}
+          {history.map((msg, index) => (
+            <Typography key={index} align={msg.role === "user" ? "right" : "left"}>
+              {msg.role === "user" ? "You: " : "Bot: "} {msg.parts[0].text}
+            </Typography>
+          ))}
+        </Stack>
+
+        {/* Input Field */}
+        <TextField
+          fullWidth
+          multiline
+          rows={5}
+          maxRows={5}
+          variant="outlined"
+          placeholder="Type your message..."
+
+          // input -> message, so that it can display 
+          value={message}
+          // to update with input
+          onChange={(e) => setMessage(e.target.value)}
+          // enter key action
+          onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+          sx={{
+            boxSizing: 'border-box',
+            border: '2px solid #ccc',
+            borderRadius: '5px',
+            backgroundColor: '#f8f8f8',
+            resize: 'none',
+            transition: '0.2s',
+            "&:hover" : {
+              transform: 'translate(-3px, -3px)',
+              boxShadow: "3px 3px 0 cyan",
+            }
+          }}
+        />
+
+        {/* Send Button */}
+        <Button 
+          variant="contained" 
+          // call the sendMessage function!
+          onClick={sendMessage} 
+          sx={{ 
+            mt: 1,
+            backgroundColor: "transparent",
+            border: "1px solid cyan",
+            marginTop: '20px',
+            float: 'right',
+            transition: '0.2s',
+            "&:hover" : {
+              backgroundColor: 'transparent',
+              transform: 'translate(-3px, -3px)',
+              boxShadow: "3px 3px 0 cyan",
+            }
+          }}>
+          Send
+        </Button>
+      </Box>
     </Box>
   )
 }
