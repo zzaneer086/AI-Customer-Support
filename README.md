@@ -1,3 +1,19 @@
+Customer Support AI chat bot, powered by Google Gemini API. 
+
+https://ai.google.dev/gemini-api/docs/quickstart?lang=node
+
+# app/api/chat/route.js
+  API request handling. Handles all interactions with AI model, sending and receiving responces. 
+
+
+
+
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
