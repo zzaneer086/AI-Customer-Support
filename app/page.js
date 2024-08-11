@@ -55,16 +55,17 @@ export default function Home() {
       backgroundColor: 'black'
     }}>
       <Box sx={{
-        width: '40vw', marginBottom: '50px'
+        width: '50vw', marginBottom: '50px'
       }}>
-        <img className={"glow eye"} id="left-eye" src="eye.svg"/>
-        <img className={typing ? "pupil focused" : "pupil idle"} id="left-pupil" src="pupil.svg"/>
-        <img className={"glow eye"} id="right-eye" src="eye.svg"/>
-        <img className={typing ? "pupil focused" : "pupil idle"} id="right-pupil" src="pupil.svg"/>
+        {/* <img className={"glow eye"} id="left-eye" src="eye.svg"/> */}
+        <img className={"glow owl"} src="owl.svg"/>
+        <img className={typing ? "pupil glow focused" : "pupil glow idle"} id="left-pupil" src="pupil.svg"/>
+        {/* <img className={"glow eye"} id="right-eye" src="eye.svg"/> */}
+        <img className={typing ? "pupil glow focused" : "pupil glow idle"} id="right-pupil" src="pupil.svg"/>
 
         {/* Chat History */}
         {/* hard coded in first message  */}
-        <Box maxHeight={'400px'} minHeight={'400px'} overflow={"hidden auto"} padding={'10px'}>
+        <Box maxHeight={'550px'} marginLeft={'15vw'} overflow={"hidden auto"} padding={'10px'}>
         <Typography>{firstMessage}</Typography>
 
         {/* using a stack to store chat history vertically.  */}
@@ -81,7 +82,6 @@ export default function Home() {
         {/* Input Field */}
         <TextField
           id="textfield"
-          fullWidth
           multiline
           rows={5}
           variant="outlined"
@@ -98,6 +98,8 @@ export default function Home() {
             borderRadius: '5px',
             backgroundColor: '#f8f8f8',
             marginTop: '10px',
+            marginLeft: '15vw',
+            width:'35vw',
             resize: 'none',
             transition: '0.2s',
             transform: typing ? 'translate(-3px, -3px)' : 'translate(0, 0)',

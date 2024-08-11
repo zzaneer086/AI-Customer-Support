@@ -14,18 +14,10 @@ body {
   filter: drop-shadow(0 0 0.75rem #00ffff);
 }
 
-.eye {
+.owl {
   position: absolute;
-}
-
-#left-eye {
-  left: calc(50vw - 70px);
-  top: 15vh;
-}
-
-#right-eye {
-  left: calc(50vw + 10px);
-  top: 15vh;
+  left: 25vw;
+  top: 35vh;
 }
 
 .pupil{
@@ -42,30 +34,38 @@ body {
 }
 
 #left-pupil {
-  left: calc(50vw - 65px);
-  top: calc(15vh + 10px);
+  left: calc(25vw + 56px);
+  top: calc(40vh + 20px);
 }
 
 #right-pupil {
-  left: calc(50vw + 15px);
-  top: calc(15vh + 10px);
+  left: calc(25vw + 156px);
+  top: calc(40vh + 20px);
 }
 
 @keyframes lookAround {
 
-  10% {
+  28% {
     transform: translate(0, 0);
   }
 
-  20% {
-    transform: translate(27px, 0);
+  30% {
+    transform: translate(13px, 0);
   }
   
-  40% {
-    transform: translate(27px, 0);
+  50% {
+    transform: translate(13px, 0);
   }
 
-  50% {
+  54% {
+    transform: translate(-13px, 0);
+  }
+
+  80% {
+    transform: translate(-13px, 0);
+  }
+
+  82% {
     transform: translate(0, 0);
   }
 
@@ -74,31 +74,31 @@ body {
 @keyframes lookDown {
 
   0% {
-    transform: translate(6px, 20px);
+    transform: translate(8px, 13px);
   }
 
   30% {
-    transform: translate(6px, 20px);
+    transform: translate(8px, 13px);
   }
 
   35% {
-    transform: translate(20px, 20px);
+    transform: translate(15px, 3px);
   }
 
   60% {
-    transform: translate(20px, 20px);
+    transform: translate(15px, 3px);
   }
 
   65% {
-    transform: translate(13px, 20px);
+    transform: translate(13px, 10px);
   }
 
   95% {
-    transform: translate(13px, 20px);
+    transform: translate(13px, 10px);
   }
 
   100% {
-    transform: translate(6px, 20px);
+    transform: translate(8px, 13px);
   }
 
 }
