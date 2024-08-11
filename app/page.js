@@ -4,11 +4,15 @@ import Image from "next/image";
 // state var to store messages
 import { useState } from "react"
 
+
 export default function Home() {
   // to store the convo.
   const [history, setHistory] = useState([])
   // store the input/curr message
   const [message, setMessage] = useState("")
+
+  // Typing boolean for CSS animations
+  const [typing, setTyping] = useState(false)
 
   const firstMessage = "Hi there! I'm the Headstarter virtual assistant. How can I help?"
 
@@ -41,7 +45,8 @@ export default function Home() {
   // temp chatgpt generated UI -->>
 
   return (
-    <Box sx={{   
+    <Box onClick={function(e){ e.target.id == 'textfield' ? setTyping(true) : setTyping(false)}} 
+    sx={{   
       width: '100vw',
       height: '100vh',
       display: 'flex',
@@ -68,6 +73,10 @@ export default function Home() {
         justifyContent: 'center', 
         alignItems: 'center'
       }}>
+        <img className={"glow eye"} id="left-eye" src="eye.svg"/>
+        <img className={typing ? "pupil focused" : "pupil idle"} id="left-pupil" src="pupil.svg"/>
+        <img className={"glow eye"} id="right-eye" src="eye.svg"/>
+        <img className={typing ? "pupil focused" : "pupil idle"} id="right-pupil" src="pupil.svg"/>
 
         {/* Chat History */}
         {/* hard coded in first message  */}
@@ -85,13 +94,12 @@ export default function Home() {
 
         {/* Input Field */}
         <TextField
+          id="textfield"
           fullWidth
           multiline
           rows={5}
-          maxRows={5}
           variant="outlined"
           placeholder="Type your message..."
-
           // input -> message, so that it can display 
           value={message}
           // to update with input
@@ -105,6 +113,8 @@ export default function Home() {
             backgroundColor: '#f8f8f8',
             resize: 'none',
             transition: '0.2s',
+            transform: typing ? 'translate(-3px, -3px)' : 'translate(0, 0)',
+            boxShadow: typing ? "3px 3px 0 cyan": "0 0 0 transparent",
             "&:hover" : {
               transform: 'translate(-3px, -3px)',
               boxShadow: "3px 3px 0 cyan",
