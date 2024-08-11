@@ -1,12 +1,16 @@
 Customer Support AI chat bot, powered by Google Gemini API. 
 
 https://ai.google.dev/gemini-api/docs/quickstart?lang=node
+https://ai.google.dev/gemini-api/docs/text-generation?lang=node
 
 ### app/api/chat/route.js
   API request handling. Handles all interactions with AI model, sending and receiving responces. 
 
 
-
+#
+#
+#
+#
 
 
 
