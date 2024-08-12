@@ -10,9 +10,9 @@ import {
 import { app, auth } from "../lib/firebaseConfig"; // Adjust the import path as necessary
 
 export default function Home() {
-  // to store the convo.
+  // State to store conversation history
   const [history, setHistory] = useState([]);
-  // store the input/curr message
+  // State to store current message input
   const [message, setMessage] = useState("");
 
   // Typing boolean for CSS animations
@@ -24,36 +24,37 @@ export default function Home() {
   const firstMessage =
     "Hi there! I'm the Headstarter virtual assistant. How can I help?";
 
-  // Firebase Auth
+  // Firebase Auth: Handle Sign In with Google
   const handleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
-      setUser(result.user);
+      setUser(result.user); // Update user state on successful sign in
     } catch (error) {
       console.error("Error during sign in: ", error);
     }
   };
 
+  // Firebase Auth: Handle Sign Out
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      setUser(null);
+      setUser(null); // Update user state on successful sign out
     } catch (error) {
       console.error("Error during sign out: ", error);
     }
   };
 
-  // send message to chat bot
+  // Function to send message to chat bot
   const sendMessage = async () => {
-    // add user input to history
+    // Add user input to history
     setHistory((history) => [
       ...history,
       { role: "user", parts: [{ text: message }] },
     ]);
-    // clear input/curr message
+    // Clear input/curr message
     setMessage("");
-    // sending the actual request
+    // Sending the actual request
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
@@ -65,7 +66,7 @@ export default function Home() {
       });
 
       const data = await response.json();
-      // add model's response to convo
+      // Add model's response to convo
       setHistory((history) => [
         ...history,
         { role: "model", parts: [{ text: data }] },
