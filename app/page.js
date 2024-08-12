@@ -89,6 +89,15 @@ export default function Home() {
     return () => unsubscribe();
   }, []);
 
+  // Function to handle Enter key press
+  const handleKeyDown = (e) => {
+    // Only send message if user is signed in and Enter key is pressed
+    if (e.key === "Enter" && user) {
+      e.preventDefault(); // Prevent default Enter key behavior
+      sendMessage();
+    }
+  };
+
   return (
     <Box
       onClick={function (e) {
@@ -178,7 +187,7 @@ export default function Home() {
           placeholder="Type your message..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+          onKeyDown={handleKeyDown} // Handle Enter key press
           sx={{
             boxSizing: "border-box",
             border: "2px solid #ccc",
