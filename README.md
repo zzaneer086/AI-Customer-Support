@@ -1,4 +1,18 @@
-Customer Support AI chat bot, powered by Google Gemini API. 
+# HeadstarterAI - Owl Chatbot 🦉
+Welcome to the HeadstarterAI Owl Chatbot! This application is designed to provide friendly, informative, and efficient customer support for the HeadstarterAI platform. The chatbot, represented by an owl persona, is here to assist emerging software engineers with their inquiries and guide them on their journey within the HeadstarterAI community.
+
+## Installation
+To run the project locally, follow these steps:
+1.	Clone the Repository
+2.	Install Dependencies:
+   npm install
+3.	Ask for and Set Up Environment Variables:
+   Create a .env file in the root of the project and add given variables
+4.	Run the Development Server:
+   npm run dev
+
+#
+### Powered by Google Gemini API. 
 
 https://ai.google.dev/gemini-api/docs/quickstart?lang=node
 https://ai.google.dev/gemini-api/docs/text-generation?lang=node
