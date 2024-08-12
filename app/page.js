@@ -1,8 +1,12 @@
 "use client";
 import { Box, Stack, TextField, Button, Typography } from "@mui/material";
-import Image from "next/image";
 import { useState, useEffect } from "react";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+} from "firebase/auth";
 import { app, auth } from "../lib/firebaseConfig"; // Adjust the import path as necessary
 
 export default function Home() {
@@ -28,6 +32,15 @@ export default function Home() {
       setUser(result.user);
     } catch (error) {
       console.error("Error during sign in: ", error);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+    } catch (error) {
+      console.error("Error during sign out: ", error);
     }
   };
 
@@ -87,6 +100,7 @@ export default function Home() {
         justifyContent: "center",
         alignItems: "flex-end",
         backgroundColor: "black",
+        position: "relative", // Added to position the owl image properly
       }}
     >
       <Box
@@ -95,16 +109,43 @@ export default function Home() {
           marginBottom: "50px",
         }}
       >
-        <img className={"glow owl"} src="owl.svg" />
+        {/* Always visible Owl Image */}
+        <img className={"glow owl"} src="/owl.svg" alt="Owl" />
+
+        {/* Sign Out Button */}
+        {user && (
+          <Button
+            variant="contained"
+            onClick={handleSignOut}
+            sx={{
+              position: "absolute",
+              top: 10,
+              right: 10,
+              backgroundColor: "cyan",
+              border: "1px solid cyan",
+              transition: "0.2s",
+              "&:hover": {
+                backgroundColor: "cyan",
+                transform: "translate(-3px, -3px)",
+                boxShadow: "3px 3px 0 blue",
+              },
+            }}
+          >
+            Sign Out
+          </Button>
+        )}
+
         <img
           className={typing ? "pupil glow focused" : "pupil glow idle"}
           id="left-pupil"
-          src="pupil.svg"
+          src="/pupil.svg"
+          alt="Left Pupil"
         />
         <img
           className={typing ? "pupil glow focused" : "pupil glow idle"}
           id="right-pupil"
-          src="pupil.svg"
+          src="/pupil.svg"
+          alt="Right Pupil"
         />
 
         {/* Chat History */}
@@ -156,27 +197,6 @@ export default function Home() {
           }}
         />
 
-        {/* Send Button */}
-        <Button
-          variant="contained"
-          onClick={sendMessage}
-          sx={{
-            mt: 1,
-            backgroundColor: "transparent",
-            border: "1px solid cyan",
-            marginTop: "5px",
-            float: "right",
-            transition: "0.2s",
-            "&:hover": {
-              backgroundColor: "transparent",
-              transform: "translate(-3px, -3px)",
-              boxShadow: "3px 3px 0 cyan",
-            },
-          }}
-        >
-          Send
-        </Button>
-
         {/* Sign In Button */}
         {!user && (
           <Button
@@ -197,6 +217,29 @@ export default function Home() {
             }}
           >
             Sign In with Google
+          </Button>
+        )}
+
+        {/* Send Button */}
+        {user && (
+          <Button
+            variant="contained"
+            onClick={sendMessage}
+            sx={{
+              mt: 1,
+              backgroundColor: "transparent",
+              border: "1px solid cyan",
+              marginTop: "5px",
+              float: "right",
+              transition: "0.2s",
+              "&:hover": {
+                backgroundColor: "transparent",
+                transform: "translate(-3px, -3px)",
+                boxShadow: "3px 3px 0 cyan",
+              },
+            }}
+          >
+            Send
           </Button>
         )}
       </Box>
