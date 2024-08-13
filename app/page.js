@@ -172,7 +172,7 @@ export default function Home() {
                 key={index}
                 align={msg.role === "user" ? "right" : "left"}
               >
-                {msg.role === "user" ? "You: " : "Bot: "}
+                {msg.role === "user" ? "You: " : "Mr.Owl: "}
                 {/* {msg.parts[0].text} */}
 
                 {/* ensure that the msg is a string or gets converted to a string from being an object */}
