@@ -172,7 +172,14 @@ export default function Home() {
                 key={index}
                 align={msg.role === "user" ? "right" : "left"}
               >
-                {msg.role === "user" ? "You: " : "Bot: "} {msg.parts[0].text}
+                {msg.role === "user" ? "You: " : "Bot: "}
+                {/* {msg.parts[0].text} */}
+
+                {/* ensure that the msg is a string or gets converted to a string from being an object */}
+                {typeof msg.parts[0].text === "object"
+                  ? JSON.stringify(msg.parts[0].text)
+                  : msg.parts[0].text}
+                {/* {msg.parts[0].text} */}
               </Typography>
             ))}
           </Stack>
